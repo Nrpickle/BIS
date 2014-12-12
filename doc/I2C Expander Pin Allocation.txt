@@ -1,0 +1,23 @@
+Pin Allocation 
+
+16 pin expander for PCF8575C I2C I/O Expander
+
+P00 - A1
+P01 - B1
+P02 - C1
+P03 - D1
+P04 - MOSFET Cathode 1
+P05 - MOSFET Cathode 2
+P06 - 
+P07 - 
+
+P10 - A2
+P11 - B2
+P12 - C2
+P13 - D2
+P14 - MOSFET Cathode 1
+P15 - MOSFET Cathode 2
+P16 - 
+P17 - 
+
+Combined with CD4511 7seg driver and 2N7000 transistors

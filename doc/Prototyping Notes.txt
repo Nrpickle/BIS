@@ -1,0 +1,7 @@
+Notes for implementation post-prototype
+
+12/12/2014
+- Ardunio Nano's 3.3 Volt Regulator is insufficient
+  - Is actually in the FTDI chip, so it is only powered when plugged into USB
+  - Might not be able to source the ~175 mA required for the ESP
+  - Solution: Add a LD1117V33 Voltage Reg
