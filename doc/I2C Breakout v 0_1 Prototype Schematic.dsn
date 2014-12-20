@@ -69,16 +69,6 @@ download the executable.-->
 			<CHARSET>0</CHARSET>
 			<FACENAME>Arial</FACENAME>
 		</FONT>
-		<FONT id='7'>
-			<HEIGHT>-20</HEIGHT>
-			<WIDTH>9</WIDTH>
-			<WEIGHT>400</WEIGHT>
-			<ITALIC>0</ITALIC>
-			<UNDERLINE>0</UNDERLINE>
-			<STRIKEOUT>0</STRIKEOUT>
-			<CHARSET>0</CHARSET>
-			<FACENAME>Arial</FACENAME>
-		</FONT>
 		<FONT id='11'>
 			<HEIGHT>-20</HEIGHT>
 			<WIDTH>9</WIDTH>
@@ -838,8 +828,7 @@ download the executable.-->
 		<TEXT pos='226.00000,184.00000' direction='3' font='5' color='000000'>BIS I2C Breakout Prototype</TEXT>
 		<TEXT pos='226.00000,194.00000' direction='3' font='5' color='000000'>Nick McComb</TEXT>
 		<TEXT pos='4.00000,82.00000' direction='3' font='6' color='000000'>Note: These can be pads on the PCB</TEXT>
-		<TEXT pos='294.00000,92.00000' direction='3' font='7' color='000000'>_INT, D.P. are NC</TEXT>
 		<WIRE a='2.00000,76.00000' b='2.00000,172.00000'/>
-		<TEXT pos='58.00000,156.00000' direction='3' font='11' color='000000'>All 7 Seg connections need a 220 ohm resistors</TEXT>
+		<TEXT pos='58.00000,156.00000' direction='3' font='11' color='000000'>All 7 Seg connections need a 220 ohm resistor</TEXT>
 	</TinyCAD>
 </TinyCADSheets>
