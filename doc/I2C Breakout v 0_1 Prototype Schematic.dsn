@@ -19,16 +19,6 @@ download the executable.-->
 			<DATE></DATE>
 			<GRID spacing='100.00000' snap='1'/>
 		</DETAILS>
-		<FONT id='0'>
-			<HEIGHT>-13</HEIGHT>
-			<WIDTH>6</WIDTH>
-			<WEIGHT>400</WEIGHT>
-			<ITALIC>0</ITALIC>
-			<UNDERLINE>0</UNDERLINE>
-			<STRIKEOUT>0</STRIKEOUT>
-			<CHARSET>0</CHARSET>
-			<FACENAME>Arial</FACENAME>
-		</FONT>
 		<FONT id='1'>
 			<HEIGHT>-10</HEIGHT>
 			<WIDTH>0</WIDTH>
@@ -50,16 +40,6 @@ download the executable.-->
 			<FACENAME>Arial</FACENAME>
 		</FONT>
 		<FONT id='4'>
-			<HEIGHT>-20</HEIGHT>
-			<WIDTH>9</WIDTH>
-			<WEIGHT>400</WEIGHT>
-			<ITALIC>0</ITALIC>
-			<UNDERLINE>0</UNDERLINE>
-			<STRIKEOUT>0</STRIKEOUT>
-			<CHARSET>0</CHARSET>
-			<FACENAME>Arial</FACENAME>
-		</FONT>
-		<FONT id='5'>
 			<HEIGHT>-13</HEIGHT>
 			<WIDTH>6</WIDTH>
 			<WEIGHT>400</WEIGHT>
@@ -69,7 +49,37 @@ download the executable.-->
 			<CHARSET>0</CHARSET>
 			<FACENAME>Arial</FACENAME>
 		</FONT>
+		<FONT id='5'>
+			<HEIGHT>-20</HEIGHT>
+			<WIDTH>9</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
 		<FONT id='6'>
+			<HEIGHT>-13</HEIGHT>
+			<WIDTH>6</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
+		<FONT id='7'>
+			<HEIGHT>-20</HEIGHT>
+			<WIDTH>9</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
+		<FONT id='11'>
 			<HEIGHT>-20</HEIGHT>
 			<WIDTH>9</WIDTH>
 			<WEIGHT>400</WEIGHT>
@@ -293,7 +303,7 @@ download the executable.-->
 				<PIN pos='196.00000,94.00000' which='0' elec='0' direction='0' part='0' number='23' show='3' length='30' number_pos='0' centre_name='0'>SDA</PIN>
 				<PIN pos='96.00000,64.00000' which='0' elec='0' direction='1' part='0' number='24' show='3' length='30' number_pos='0' centre_name='0'>Vcc</PIN>
 				<PIN pos='100.00000,64.00000' which='0' elec='0' direction='1' part='0' number='12' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
-				<TEXT pos='144.00000,80.00000' direction='3' font='3' color='000000'>PCF8575C</TEXT>
+				<TEXT pos='144.00000,80.00000' direction='3' font='4' color='000000'>PCF8575C</TEXT>
 			</TinyCAD>
 		</SYMBOLDEF>
 		<SYMBOLDEF id='3'>
@@ -325,8 +335,8 @@ download the executable.-->
 			<REF_POINT power='0' part='0' pos='116.00000,100.00000'/>
 			<TinyCAD>
 				<RECTANGLE a='72.00000,68.00000' b='116.00000,94.00000' style='5' fill='0'/>
-				<TEXT pos='86.00000,90.00000' direction='3' font='3' color='000000'>Digit 1</TEXT>
-				<TEXT pos='86.00000,76.00000' direction='3' font='3' color='000000'>Digit 2</TEXT>
+				<TEXT pos='86.00000,90.00000' direction='3' font='4' color='000000'>Digit 1</TEXT>
+				<TEXT pos='86.00000,76.00000' direction='3' font='4' color='000000'>Digit 2</TEXT>
 				<PIN pos='92.00000,100.00000' which='0' elec='0' direction='0' part='0' number='1' show='3' length='30' number_pos='0' centre_name='0'>E</PIN>
 				<PIN pos='88.00000,100.00000' which='0' elec='0' direction='0' part='0' number='2' show='3' length='30' number_pos='0' centre_name='0'>D</PIN>
 				<PIN pos='84.00000,100.00000' which='0' elec='0' direction='0' part='0' number='3' show='3' length='30' number_pos='0' centre_name='0'>C</PIN>
@@ -345,7 +355,7 @@ download the executable.-->
 				<PIN pos='76.00000,100.00000' which='0' elec='0' direction='0' part='0' number='16' show='3' length='30' number_pos='0' centre_name='0'>A</PIN>
 				<PIN pos='100.00000,100.00000' which='0' elec='0' direction='0' part='0' number='17' show='3' length='30' number_pos='0' centre_name='0'>G</PIN>
 				<PIN pos='96.00000,100.00000' which='0' elec='0' direction='0' part='0' number='18' show='3' length='30' number_pos='0' centre_name='0'>F</PIN>
-				<TEXT pos='78.00000,82.00000' direction='3' font='3' color='000000'>5X23A 7 Segment Display</TEXT>
+				<TEXT pos='78.00000,82.00000' direction='3' font='4' color='000000'>5X23A 7 Segment Display</TEXT>
 			</TinyCAD>
 		</SYMBOLDEF>
 		<SYMBOLDEF id='4'>
@@ -796,8 +806,8 @@ download the executable.-->
 			<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
 			<FIELD type='1' description='Package' value='package name for PCB layout' show='0' pos='-16.00000,4.40000'/>
 		</SYMBOL>
-		<TEXT pos='184.00000,16.00000' direction='3' font='0' color='000000'>&quot;Left Connector&quot;</TEXT>
-		<TEXT pos='208.00000,16.00000' direction='3' font='0' color='000000'>&quot;Right Connector&quot;</TEXT>
+		<TEXT pos='184.00000,16.00000' direction='3' font='3' color='000000'>&quot;Left Connector&quot;</TEXT>
+		<TEXT pos='208.00000,16.00000' direction='3' font='3' color='000000'>&quot;Right Connector&quot;</TEXT>
 		<WIRE a='156.00000,44.00000' b='156.00000,46.00000'/>
 		<WIRE a='222.00000,34.00000' b='222.00000,46.00000'/>
 		<WIRE a='196.00000,46.00000' b='156.00000,46.00000'/>
@@ -825,10 +835,11 @@ download the executable.-->
 		<WIRE a='214.00000,34.00000' b='214.00000,38.00000'/>
 		<JUNCTION pos='214.00000,38.00000'/>
 		<WIRE a='232.00000,38.00000' b='214.00000,38.00000'/>
-		<TEXT pos='226.00000,184.00000' direction='3' font='4' color='000000'>BIS I2C Breakout Prototype</TEXT>
-		<TEXT pos='226.00000,194.00000' direction='3' font='4' color='000000'>Nick McComb</TEXT>
-		<TEXT pos='4.00000,82.00000' direction='3' font='5' color='000000'>Note: These can be pads on the PCB</TEXT>
-		<TEXT pos='294.00000,92.00000' direction='3' font='6' color='000000'>_INT, D.P. are NC</TEXT>
+		<TEXT pos='226.00000,184.00000' direction='3' font='5' color='000000'>BIS I2C Breakout Prototype</TEXT>
+		<TEXT pos='226.00000,194.00000' direction='3' font='5' color='000000'>Nick McComb</TEXT>
+		<TEXT pos='4.00000,82.00000' direction='3' font='6' color='000000'>Note: These can be pads on the PCB</TEXT>
+		<TEXT pos='294.00000,92.00000' direction='3' font='7' color='000000'>_INT, D.P. are NC</TEXT>
 		<WIRE a='2.00000,76.00000' b='2.00000,172.00000'/>
+		<TEXT pos='58.00000,156.00000' direction='3' font='11' color='000000'>All 7 Seg connections need a 220 ohm resistors</TEXT>
 	</TinyCAD>
 </TinyCADSheets>
