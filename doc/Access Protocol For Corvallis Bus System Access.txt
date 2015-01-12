@@ -1,0 +1,5 @@
+-For Realtime Bus Posistioning (Results in an XML file)
+http://www.corvallistransit.com/rtt/public/utility/file.aspx?contenttype=SQLXML&Name=RoutePositionET.xml&PlatformNo=14599
+
+-Useful Reference Library
+https://github.com/ryanatwork/Connexionz/blob/master/lib/connexionz/client.rb
