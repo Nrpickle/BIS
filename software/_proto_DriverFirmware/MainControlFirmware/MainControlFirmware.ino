@@ -12,58 +12,74 @@ void setup() {
   Wire.begin();
   
   PCComm.begin(9600);
-  PCComm.println("[Board Init]");
+  PCComm.print("\n\r[Board Init]\n\r");
   
 
 }
 
 //Address 1 = 21 in hex
 
+const uint8_t dispRight = (1<<7);
+const uint16_t dispLeft = (dispRight<<8);
+const uint8_t charsL [16] = {0b1000000,0b1111001,0b0100100,0b0110000,0b0011001,0b0010010,0b0000010,0b1111000,0b0000000,0b0010000,0b0001000,0b0000011,0b1000110,0b0100001,0b0000110,0b0001110};
+const uint8_t nothingL = 0b1111111;
+
+enum MasterStates {
+  POLLING,
+  DISPLEFT,
+  DISPRIGHT,
+  MISC
+} CurrentState = DISPLEFT;
+
+
 void loop()
 {
   uint8_t status = 0;
-  static uint16_t i;
+  static uint16_t iter = 0;
+  static uint16_t i = 4;
+  uint16_t to_write = 0;
   
-  // display device information on serial console
-  Serial.print("Loop ");
-  Serial.print(++i, DEC);
-  Serial.print(", address ");
-  Serial.print(device.getAddress(), DEC);
-  Serial.print(", ");
-  
-  // attempt to write 16-bit word
-  status = device.digitalWrite(i);
-  if (TWI_SUCCESS == status)
-  {
-    // display success information on serial console
-    Serial.print("write 0x");
-    Serial.print(i, HEX);
-    Serial.print(", ");
-  }
-  else
-  {
-    // display error information on serial console
-    Serial.print("write error ");
-    Serial.print(status, DEC);
-    Serial.print(", ");
+  switch(CurrentState) {
+    case DISPLEFT:
+      to_write += dispLeft;
+      to_write += charsL[1];
+      to_write += (charsL[2] << 8);
+      
+      CurrentState = DISPRIGHT;
+      break;
+    case DISPRIGHT:
+      to_write += dispRight;
+      to_write += charsL[3];
+      to_write += (charsL[4] << 8);
+      
+      CurrentState = DISPLEFT;
+      break;
   }
   
-  // attempt to read 16-bit word
-  status = device.digitalRead();
-  if (TWI_SUCCESS == status)
-  {
-    // display success information on serial console
-    Serial.print("read 0x");
-    Serial.print(device.getPorts(), HEX);
-    Serial.println(".");
-  }
-  else
-  {
-    // display error information on serial console
-    Serial.print("read error ");
-    Serial.print(status, DEC);
-    Serial.println(".");
-  }
   
-  delay(1000);
+  //to_write = 0 + charsL[4] + (charsL[2] << 8) + dispLeft;
+  
+  status = device.digitalWrite(to_write);
+  
+  
+  /*
+  
+  PCComm.print("[Wrote '");
+  PCComm.print(to_write, BIN);
+  PCComm.print("' to board iter: ");
+  PCComm.print(iter); 
+  PCComm.print("]\n\r");
+  */
+  
+  //delayMicroseconds(100);
+  ++iter;
 }
+
+
+/* "Recycle Bin" 
+
+             //  mgfedcbamgfedcba
+  //to_write = 0b0100000101000000;//(1<<1) + (1<<2) + (1<<3) + (1<<4) + (1<<5) + (1<<6) + (1<<7);
+
+
+*/
