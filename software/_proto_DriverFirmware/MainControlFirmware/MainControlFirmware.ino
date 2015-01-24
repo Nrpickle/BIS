@@ -28,14 +28,18 @@ Jack Christensen's Timer: https://github.com/JChristensen/Timer
 //Create program-wide objects
 SoftwareSerial PCComm(11,10);  //Rx, Tx
 
-I2cDiscreteIoExpander device(0);
+//I2cDiscreteIoExpander device(0);
 I2cDiscreteIoExpander device2(1);
 
 Timer t;  //Instantiate timer
 
-class Display {
+struct Display {
 	public:
-		Display();
+		Display(int deviceID);
+		~Display();
+		void dispRight();
+		void dispLeft();
+		I2cDiscreteIoExpander * device;
 		uint16_t current;
 		uint16_t left;
 		uint16_t right;
@@ -59,6 +63,7 @@ const uint8_t dispRight = (1<<7);
 const uint16_t dispLeft = (dispRight<<8);
 const uint8_t charsL [16] = {0b1000000,0b1111001,0b0100100,0b0110000,0b0011001,0b0010010,0b0000010,0b1111000,0b0000000,0b0010000,0b0001000,0b0000011,0b1000110,0b0100001,0b0000110,0b0001110};  //Contains the constants for the 7seg values
 const uint8_t nothingL = 0b1111111;
+const uint8_t errorL = 0b0110110;
 
 enum MasterStates {
   POLLING,
@@ -70,7 +75,8 @@ enum MasterStates {
 
 void loop()
 {
-  static Display disp[2];
+  static Display disp(0);
+  static Display disp2(1);
   
   static uint16_t timing = 0;
   static uint16_t i = 0;
@@ -84,24 +90,28 @@ void loop()
 	
 	i = ++i%10;
 	
-	configureToWrite(disp[0].left, LEFT, '5' , ' ');
-	configureToWrite(disp[0].right, RIGHT, '3', i + 48);
+	configureToWrite(disp.left, LEFT, 'F' , 'F');
+	configureToWrite(disp.right, RIGHT, '3', i + 48);
+	configureToWrite(disp2.left, LEFT, 'f' , 'F');
+	configureToWrite(disp2.right, RIGHT, '3', i + 48);
   }
   
   switch(CurrentState) {
     case DISPLEFT:
-	  disp[0].current = disp[0].left;
+	  disp.dispLeft();
+	  disp2.dispLeft();
       CurrentState = DISPRIGHT;
       break;
     case DISPRIGHT:
-	  disp[0].current = disp[0].right;
+	  disp.dispRight();
+	  disp2.dispRight();
       CurrentState = DISPLEFT;
       break;
   }
   
   
-  status = device.digitalWrite(disp[0].current);
-  status2 = device2.digitalWrite(disp[0].current);
+  status = disp.device->digitalWrite(disp.current);
+  status2 = disp2.device->digitalWrite(disp.current);
   
   
   /*
@@ -151,6 +161,9 @@ void configureToWrite(uint16_t & to_write, bool l_r, char left_digit, char right
 	else if (left_digit == ' '){
 		to_write += nothingL;
 	}
+	else {
+		to_write += errorL;
+	}
 	
 	if(isdigit(right_digit)){
 		to_write += (charsL[(int)right_digit - 48] << 8);
@@ -161,14 +174,30 @@ void configureToWrite(uint16_t & to_write, bool l_r, char left_digit, char right
 	else if (right_digit == ' '){
 		to_write += (nothingL << 8);
 	}
+	else {
+		to_write += (errorL << 8);
+	}
 	
 }
 
 //Display constructor
-Display::Display(){
+Display::Display(int deviceID){
+	device = new I2cDiscreteIoExpander(deviceID);
 	current = 0;
 	left = 0;
 	right = 0;
+}
+
+Display::~Display(){
+	delete device;
+}
+
+void Display::dispRight(){
+	current = right;
+}
+
+void Display::dispLeft(){
+	current = left;
 }
 
 //Display struct classes
