@@ -10,14 +10,13 @@ If you are using this code from GitHub, you can find the Arduino libraries in th
 
 Libraries used:
 I2cDiscreteIoExpander: https://github.com/4-20ma/I2cDiscreteIoExpander
-Jack Christensen's Timer: https://github.com/JChristensen/Timer
 */
 
 
 #include <SoftwareSerial.h>
 #include <Wire.h>
 #include <I2cDiscreteIoExpander.h>
-#include <Timer.h> //http://github.com/JChristensen/Timer
+#include <TimerOne.h>
 
 //Defines
 #define LEFT 0
