@@ -39,6 +39,7 @@ struct Display {
 		~Display();
 		void dispRight();
 		void dispLeft();
+		int writeToDisplay();
 		I2cDiscreteIoExpander * device;
 		uint16_t current;
 		uint16_t left;
@@ -85,7 +86,7 @@ void loop()
   
   uint16_t to_write = 0;
   
-  if(!timing){
+  if(!timing){  //Time to do the asynch task
 	//PCComm.println("[Processing configureToWrite]");
 	
 	i = ++i%10;
@@ -109,9 +110,8 @@ void loop()
       break;
   }
   
-  
-  status = disp.device->digitalWrite(disp.current);
-  status2 = disp2.device->digitalWrite(disp.current);
+  disp.writeToDisplay();
+  disp2.writeToDisplay();
   
   
   /*
@@ -198,6 +198,10 @@ void Display::dispRight(){
 
 void Display::dispLeft(){
 	current = left;
+}
+
+int Display::writeToDisplay(){
+	device->digitalWrite(current);
 }
 
 //Display struct classes
