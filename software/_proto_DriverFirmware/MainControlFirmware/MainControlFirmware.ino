@@ -4,7 +4,8 @@
 
 SoftwareSerial PCComm(11,10);  //Rx, Tx
 
-I2cDiscreteIoExpander device(1);
+I2cDiscreteIoExpander device(0);
+I2cDiscreteIoExpander device2(1);
 
 #define LEFT 0
 #define RIGHT 1
@@ -14,7 +15,7 @@ void setup() {
   
   Wire.begin();  //A4(SDA), A5(SCL)
   
-  PCComm.begin(9600);
+  PCComm.begin(57600);
   PCComm.print("\n\r[Board Init]\n\r");
   
 
@@ -38,37 +39,46 @@ enum MasterStates {
 void loop()
 {
   uint8_t status = 0;
-  static uint16_t iter = 0;
+  uint8_t status2 = 0;
+  static uint16_t timing = 0;
   static uint16_t i = 4;
   uint16_t to_write = 0;
   
   switch(CurrentState) {
     case DISPLEFT:
-	  configureToWrite(to_write, LEFT, '1' , '2');
+	  configureToWrite(to_write, LEFT, 'c' , '5');
 
       CurrentState = DISPRIGHT;
       break;
     case DISPRIGHT:
-      configureToWrite(to_write, RIGHT, '3', '4');
+      configureToWrite(to_write, RIGHT, 'b', 'b');
 	  
       CurrentState = DISPLEFT;
       break;
   }
   
   status = device.digitalWrite(to_write);
+  status2 = device2.digitalWrite(to_write);
   
   
   /*
-  
   PCComm.print("[Wrote '");
   PCComm.print(to_write, BIN);
-  PCComm.print("' to board iter: ");
-  PCComm.print(iter); 
+  PCComm.print("' to board timing: ");
+  PCComm.print(timing); 
   PCComm.print("]\n\r");
   */
   
   //delayMicroseconds(100);
-  ++iter;
+  //delay(100);
+  ++timing;
+  
+  timing = timing % 5000;
+  
+  if(!timing){
+	  PCComm.println("[Finished Cycle]");
+  }
+  
 }
 
 void configureToWrite(uint16_t & to_write, bool l_r, char left_digit, char right_digit){
@@ -84,9 +94,15 @@ void configureToWrite(uint16_t & to_write, bool l_r, char left_digit, char right
 	if(isdigit(left_digit)){
 		to_write += charsL[(int)left_digit - 48];
 	}
+	else if (left_digit >= 97 && left_digit <= 102){
+		to_write += charsL[(int)left_digit - 87];
+	}
 	
 	if(isdigit(right_digit)){
 		to_write += (charsL[(int)right_digit - 48] << 8);
+	}
+	else if (right_digit >= 97 && right_digit <= 102){
+		to_write += (charsL[(int)right_digit - 87] << 8);
 	}
 	
 }
