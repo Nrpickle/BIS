@@ -1,0 +1,13 @@
+- Auto Addressing functionality
+ -Use the CD74HC283M96 4 Bit adder to automatically address the boards
+
+- DIP Socket for china-based Arduino Nanos
+
+- Output 3 connections that connect to ground for auto-address
+
+- 3.3 volt regulator for ESP8266 that is rated for 200mA
+
+- Nice spot for board-to-board connectors
+
+- Rounded edges (for fanciness)
+
