@@ -1,0 +1,10 @@
+Changelist for next revision
+
+- Add auto-address functionality using a binary adder
+
+- Add more clearance around resistor pads (for reliability).
+
+- Use two seperate 4 pin connectors for mechanical stability
+
+- Spec better (nicer?) board to board connectors. 
+ - Still has to be user friendly
