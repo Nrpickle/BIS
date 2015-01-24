@@ -31,7 +31,7 @@ SoftwareSerial PCComm(11,10);  //Rx, Tx
 //I2cDiscreteIoExpander device(0);
 I2cDiscreteIoExpander device2(1);
 
-Timer t;  //Instantiate timer
+//Timer t;  //Instantiate timer
 
 class Display {
 	public:
@@ -42,8 +42,12 @@ class Display {
 		int writeToDisplay();
 		void setLeft(char * input);
 		void setLeft(char input);
+//		void setLeft(char input, char input2);
 		void setRight(char * input);
 		void setRight(char input);
+//		void setRight(char input, char input2);
+		void setAll(char * input);
+		void setAll(char input);
 	private:
 		I2cDiscreteIoExpander * device;
 		uint16_t current;
@@ -64,7 +68,7 @@ void setup() {
 
 //Address 1 = 21 in hex
 
-//Constants for the 
+//Constants for the I2C Expander
 const uint8_t dispRight = (1<<7);
 const uint16_t dispLeft = (dispRight<<8);
 const uint8_t charsL [16] = {0b1000000,0b1111001,0b0100100,0b0110000,0b0011001,0b0010010,0b0000010,0b1111000,0b0000000,0b0010000,0b0001000,0b0000011,0b1000110,0b0100001,0b0000110,0b0001110};  //Contains the constants for the 7seg values
@@ -84,7 +88,7 @@ void loop()
   static Display disp(0);
   static Display disp2(1);
   
-  static uint16_t timing = 0;
+  static uint16_t timing = 1;
   static uint16_t i = 0;
   uint8_t status = 0;
   uint8_t status2 = 0;
@@ -97,15 +101,15 @@ void loop()
 	i = ++i%10;
 	char temp[2];
 	
-	disp.setLeft("C5");
-	disp.setRight("89");
+	disp.setLeft("B1");
+	disp.setRight('5');
+	//disp.setAll("b15 ");
 	
+	//disp2.setAll('5');
 	disp2.setLeft('5');
 	temp[0] = i + 48;
-	temp[1] = 1 + 48;
+	temp[1] = '4'; //4 + 48;
 	disp2.setRight(temp);
-	//configureToWrite(disp2.left, LEFT, 'f' , 'F');
-	//configureToWrite(disp2.right, RIGHT, '3', i + 48);
   }
   
   switch(CurrentState) {
@@ -198,6 +202,9 @@ DISPLAY STRUCT FUNCTIONS
 //Display constructor
 Display::Display(int deviceID){
 	device = new I2cDiscreteIoExpander(deviceID);
+	if(deviceID == 0){
+		setAll("b15");
+	}
 	current = 0;
 	left = 0;
 	right = 0;
@@ -230,6 +237,15 @@ void Display::setLeft(char input){
 	configureToWrite(left, LEFT, input, ' ');
 }
 
+/*
+//NOT WORKING
+void Display::setLeft(char input, char input2){
+	input = tolower(input);
+	input2 = tolower(input2);
+	configureToWrite(left, LEFT, input, input2);
+}
+*/
+
 void Display::setRight(char * input){
 	input[0] = tolower(input[0]);
 	input[1] = tolower(input[1]);
@@ -239,6 +255,30 @@ void Display::setRight(char * input){
 void Display::setRight(char input){
 	input = tolower(input);
 	configureToWrite(right, RIGHT, input, ' ');
+}
+
+/*
+//NOT WORKING
+void Display::setRight(char input, char input2){
+	input = tolower(input);
+	input2 = tolower(input2);
+	configureToWrite(right, RIGHT, input, input2);
+}
+*/
+
+void Display::setAll(char * input){
+	char temp[2];
+	temp[0] = input[0];
+	temp[1] = input[1];
+	setLeft(temp);
+	temp[0] = input[2];
+	temp[1] = input[3];
+	setRight(temp);
+}
+
+void Display::setAll(char input){
+	setLeft(input);
+	setRight(' ');
 }
 
 /* * * * * * * * * * * * * * 
