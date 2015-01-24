@@ -40,6 +40,10 @@ struct Display {
 		void dispRight();
 		void dispLeft();
 		int writeToDisplay();
+		void setLeft(char * input);
+		void setLeft(char input);
+		void setRight(char * input);
+		void setRight(char input);
 		I2cDiscreteIoExpander * device;
 		uint16_t current;
 		uint16_t left;
@@ -90,11 +94,17 @@ void loop()
 	//PCComm.println("[Processing configureToWrite]");
 	
 	i = ++i%10;
+	char temp[2];
 	
-	configureToWrite(disp.left, LEFT, 'F' , 'F');
-	configureToWrite(disp.right, RIGHT, '3', i + 48);
-	configureToWrite(disp2.left, LEFT, 'f' , 'F');
-	configureToWrite(disp2.right, RIGHT, '3', i + 48);
+	disp.setLeft("C5");
+	disp.setRight("89");
+	
+	disp2.setLeft('5');
+	temp[0] = i + 48;
+	temp[1] = 1 + 48;
+	disp2.setRight(temp);
+	//configureToWrite(disp2.left, LEFT, 'f' , 'F');
+	//configureToWrite(disp2.right, RIGHT, '3', i + 48);
   }
   
   switch(CurrentState) {
@@ -180,6 +190,10 @@ void configureToWrite(uint16_t & to_write, bool l_r, char left_digit, char right
 	
 }
 
+/* * * * * * * * * * * * 
+DISPLAY STRUCT FUNCTIONS
+* * * * * * * * * * * */
+
 //Display constructor
 Display::Display(int deviceID){
 	device = new I2cDiscreteIoExpander(deviceID);
@@ -201,10 +215,35 @@ void Display::dispLeft(){
 }
 
 int Display::writeToDisplay(){
-	device->digitalWrite(current);
+	return device->digitalWrite(current);
 }
 
-//Display struct classes
+void Display::setLeft(char * input){
+	input[0] = tolower(input[0]);
+	input[1] = tolower(input[1]);
+	configureToWrite(left, LEFT, input[0], input[1]);
+}
+
+void Display::setLeft(char input){
+	input = tolower(input);
+	configureToWrite(left, LEFT, input, ' ');
+}
+
+void Display::setRight(char * input){
+	input[0] = tolower(input[0]);
+	input[1] = tolower(input[1]);
+	configureToWrite(right, RIGHT, input[0], input[1]);
+}
+
+void Display::setRight(char input){
+	input = tolower(input);
+	configureToWrite(right, RIGHT, input, ' ');
+}
+
+/* * * * * * * * * * * * * * 
+END DISPLAY STRUCT FUNCTIONS
+* * * * * * * * * * * * * */
+
 
 /* "Recycle Bin" 
 
