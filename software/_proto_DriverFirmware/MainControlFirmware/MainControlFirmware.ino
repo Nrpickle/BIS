@@ -61,6 +61,8 @@ void setup() {
   PCComm.begin(57600);
   PCComm.print("\n\r[Board Init]\n\r");
   
+  Timer1.initialize(3000);  //def 100000
+  Timer1.attachInterrupt( dispDrive );
   //t.every(2000, sayHello);
 
 }
@@ -81,21 +83,22 @@ enum MasterStates {
   MISC
 } CurrentState = DISPLEFT;
 
+static Display disp(0);
+static Display disp2(1);
 
 void loop()
 {
-  static Display disp(0);
-  static Display disp2(1);
+
   
   static uint16_t timing = 1;
   static uint16_t i = 0;
   uint8_t status = 0;
   uint8_t status2 = 0;
   
-  uint16_t to_write = 0;
+  //uint16_t to_write = 0;
   
   if(!timing){  //Time to do the asynch tasks
-	//PCComm.println("[Processing configureToWrite]");
+	//PCComm.println("[Processing Asynch Tasks]");
 	
 	i = ++i%10;
 	char temp[2];
@@ -111,22 +114,11 @@ void loop()
 	disp2.setRight(temp);
   }
   
-  switch(CurrentState) {
-    case DISPLEFT:
-	  disp.dispLeft();
-	  disp2.dispLeft();
-      CurrentState = DISPRIGHT;
-      break;
-    case DISPRIGHT:
-	  disp.dispRight();
-	  disp2.dispRight();
-      CurrentState = DISPLEFT;
-      break;
-  }
+
+
   
   disp.writeToDisplay();
   disp2.writeToDisplay();
-  
   
   /*
   PCComm.print("[Wrote '");
@@ -142,8 +134,25 @@ void loop()
   
 }
 
-void sayHello(){
-	PCComm.println("Hello!");
+//Drives the I2C interface for the displays
+void dispDrive(){
+	
+  PCComm.println("[dispDrive]");
+  
+  switch(CurrentState) {
+    case DISPLEFT:
+	  disp.dispLeft();
+	  disp2.dispLeft();
+      CurrentState = DISPRIGHT;
+      break;
+    case DISPRIGHT:
+	  disp.dispRight();
+	  disp2.dispRight();
+      CurrentState = DISPLEFT;
+      break;
+  }
+  
+
 }
 
 /*
