@@ -75,6 +75,9 @@ const uint16_t dispLeft = (dispRight<<8);
 const uint8_t charsL [16] = {0b1000000,0b1111001,0b0100100,0b0110000,0b0011001,0b0010010,0b0000010,0b1111000,0b0000000,0b0010000,0b0001000,0b0000011,0b1000110,0b0100001,0b0000110,0b0001110};  //Contains the constants for the 7seg values
 const uint8_t nothingL = 0b1111111;
 const uint8_t errorL = 0b0110110;
+const uint8_t iL = 0b1111011; //Just segment c_str
+const uint8_t tL = 0b0000111; // c d e f g
+const uint8_t nL = 0b0101011; //c g e
 
 enum MasterStates {
   POLLING,
@@ -103,19 +106,32 @@ void loop()
 	i = ++i%10;
 	char temp[2];
 	
-	disp.setLeft("B1");
-	disp.setRight('5');
-	//disp.setAll("b15 ");
+	//disp.setLeft("B1");
+	//disp.setRight("it");
+	disp.setAll("bi5 ");
+	disp2.setAll("init");
 	
 	//disp2.setAll('5');
+	/*
 	disp2.setLeft('5');
 	temp[0] = i + 48;
 	temp[1] = '4'; //4 + 48;
 	disp2.setRight(temp);
+	*/
   }
   
-
-
+  switch(CurrentState) {
+    case DISPLEFT:
+	  disp.dispLeft();
+	  disp2.dispLeft();
+      CurrentState = DISPRIGHT;
+      break;
+    case DISPRIGHT:
+	  disp.dispRight();
+	  disp2.dispRight();
+      CurrentState = DISPLEFT;
+      break;
+  }
   
   disp.writeToDisplay();
   disp2.writeToDisplay();
@@ -137,20 +153,9 @@ void loop()
 //Drives the I2C interface for the displays
 void dispDrive(){
 	
-  PCComm.println("[dispDrive]");
+  //PCComm.println("[dispDrive]");
   
-  switch(CurrentState) {
-    case DISPLEFT:
-	  disp.dispLeft();
-	  disp2.dispLeft();
-      CurrentState = DISPRIGHT;
-      break;
-    case DISPRIGHT:
-	  disp.dispRight();
-	  disp2.dispRight();
-      CurrentState = DISPLEFT;
-      break;
-  }
+
   
 
 }
@@ -184,6 +189,15 @@ void configureToWrite(uint16_t & to_write, bool l_r, char left_digit, char right
 	else if (left_digit == ' '){
 		to_write += nothingL;
 	}
+	else if (left_digit == 't'){
+		to_write += tL;
+	}
+	else if (left_digit == 'i'){
+		to_write += iL;
+	}
+	else if (left_digit == 'n'){
+		to_write += nL;
+	}
 	else {
 		to_write += errorL;
 	}
@@ -196,6 +210,15 @@ void configureToWrite(uint16_t & to_write, bool l_r, char left_digit, char right
 	}
 	else if (right_digit == ' '){
 		to_write += (nothingL << 8);
+	}
+	else if (right_digit == 't'){
+		to_write += (tL << 8);
+	}
+	else if (right_digit == 'i'){
+		to_write += (iL << 8);
+	}
+	else if (right_digit == 'n'){
+		to_write += (nL << 8);
 	}
 	else {
 		to_write += (errorL << 8);
