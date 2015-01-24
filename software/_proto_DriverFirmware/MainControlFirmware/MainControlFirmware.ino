@@ -33,7 +33,7 @@ I2cDiscreteIoExpander device2(1);
 
 Timer t;  //Instantiate timer
 
-struct Display {
+class Display {
 	public:
 		Display(int deviceID);
 		~Display();
@@ -44,6 +44,7 @@ struct Display {
 		void setLeft(char input);
 		void setRight(char * input);
 		void setRight(char input);
+	private:
 		I2cDiscreteIoExpander * device;
 		uint16_t current;
 		uint16_t left;
@@ -90,7 +91,7 @@ void loop()
   
   uint16_t to_write = 0;
   
-  if(!timing){  //Time to do the asynch task
+  if(!timing){  //Time to do the asynch tasks
 	//PCComm.println("[Processing configureToWrite]");
 	
 	i = ++i%10;
