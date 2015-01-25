@@ -6,7 +6,7 @@ mccombn@onid.oregonstate.edu / nick@nickmccomb.net
 
 You can find this code (and related files) at https://github.com/Nrpickle/BIS
 
-If you are using this code from GitHub, you can find the Arduino libraries in the 'aux' folder.
+If you are using this code from GitHub, you can find the Arduino libraries in the 'auxiliary' folder.
 
 Libraries used:
 I2cDiscreteIoExpander: https://github.com/4-20ma/I2cDiscreteIoExpander
@@ -23,6 +23,7 @@ I2cDiscreteIoExpander: https://github.com/4-20ma/I2cDiscreteIoExpander
 #define RIGHT 1
 
 #define TIMING_CONSTANT 1000
+#define INIT_TIMING_COUNTER 2
 
 //Create program-wide objects
 SoftwareSerial PCComm(11,10);  //Rx, Tx
@@ -92,9 +93,9 @@ static Display disp2(1);
 void loop()
 {
 
-  
   static uint16_t timing = 1;
   static uint16_t i = 0;
+  static uint8_t initTimer = 0;
   uint8_t status = 0;
   uint8_t status2 = 0;
   
@@ -106,18 +107,19 @@ void loop()
 	i = ++i%10;
 	char temp[2];
 	
-	//disp.setLeft("B1");
-	//disp.setRight("it");
-	disp.setAll("bi5 ");
-	disp2.setAll("init");
+	//Initialization routine
+	if (initTimer < INIT_TIMING_COUNTER){
+		++initTimer;
+		disp2.setAll("bi5 ");
+		disp.setAll("init");
+	}
+	else {  //Main operating mode
+		disp.setAll("1234");
+		disp2.setLeft("ab");
+		disp2.setRight("cd");
+	}
 	
-	//disp2.setAll('5');
-	/*
-	disp2.setLeft('5');
-	temp[0] = i + 48;
-	temp[1] = '4'; //4 + 48;
-	disp2.setRight(temp);
-	*/
+  
   }
   
   switch(CurrentState) {
