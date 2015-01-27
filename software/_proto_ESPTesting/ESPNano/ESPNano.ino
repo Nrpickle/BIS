@@ -1,8 +1,8 @@
 #include <SoftwareSerial.h>
 
-#define SSID    "OSU_Access"
-#define PASS    ""
-#define DST_IP  "220.181.111.85"
+#define SSID    "NickNet"
+#define PASS    "27304600"
+#define DST_IP  "173.194.33.136" //Google.com
 
 SoftwareSerial dbgSerial(11, 10); //Rx, Tx
 
@@ -30,6 +30,9 @@ void setup(){
 	if(Serial.find("OK")){
 		dbgSerial.println("[Module Responded OK]");
 	}
+	/* else {
+		testFailed();
+	} */
 	
 	delay(500);
 	
@@ -39,7 +42,11 @@ void setup(){
 	if(Serial.find("OK")){
 		dbgSerial.println("[Module Responded OK]");
 	}
+	else {
+		testFailed();
+	}
 	
+	dbgSerial.println("[Attempting to connect to WiFi]");
 	bool connected = false;
 	for (int i = 0; i < 5; i++){
 		if(connectWiFi()){
@@ -48,7 +55,8 @@ void setup(){
 		}
 	}
 	if(!connected){
-		dbgSerial.print("[### Failed to connect to WiFi ###]");
+		dbgSerial.println("[### Failed to connect to WiFi ###]");
+		testFailed();
 	}
 	
 	delay(5000);	
@@ -59,22 +67,58 @@ void setup(){
 	if(Serial.find("OK")){
 		dbgSerial.println("[Module Responded OK]");
 	}
+	
+	dbgSerial.println("[Requesting IP]");
+	Serial.print("AT+CIFSR\015\012");
+	for(int i = 0; i < 500; ++i){
+		if(Serial.available()){
+			dbgSerial.print((char) Serial.read());
+		}
+		delay(1);
+	}
 }
 
 void loop(){
-	/*
-	if(Serial.available()){
-		dbgSerial.print((char) Serial.read());
-	}
-	*/
 	
-	
+
+  String cmd = "AT+CIPSTART=\"TCP\",\"";
+  cmd += DST_IP;
+  cmd += "\",80";
+  Serial.println(cmd);
+  dbgSerial.println(cmd);
+  if (Serial.find("Error")) return;
+  cmd = "GET / HTTP/1.0\r\n\r\n";
+  Serial.print("AT+CIPSEND=");
+  Serial.println(cmd.length());
+  if (Serial.find(">"))
+  {
+    dbgSerial.print(">");
+  } else
+  {
+    Serial.println("AT+CIPCLOSE");
+    dbgSerial.println("connect timeout");
+    delay(1000);
+    return;
+  }
+  Serial.print(cmd);
+  delay(2000);
+  //Serial.find("+IPD");
+  while (Serial.available())
+  {
+    char c = Serial.read();
+    dbgSerial.write(c);
+    if (c == '\r') dbgSerial.print('\n');
+  }
+  dbgSerial.println("====");
+  delay(1000);
 	
 
 	
 	//dbgSerial.println("[Prompting for available networks]");
 	//Serial.print("AT+CWLAP\015\012");
 	
+	
+	//Command prompt to send commands to ESP module
 	while(1){
 		if(Serial.available()){
 			dbgSerial.print((char) Serial.read());
@@ -107,9 +151,13 @@ bool connectWiFi() {
 		return true;
 	}
 	else {
-		dbgSerial.println("[### Failed to connect to Wifi ###]");
+		dbgSerial.println("[# Failed to connect to Wifi #]\n");
 		return false;
 	}
 
 }
 
+void testFailed(){
+	dbgSerial.println("[### Previous Test Failed ###]");
+	while(1);
+}
