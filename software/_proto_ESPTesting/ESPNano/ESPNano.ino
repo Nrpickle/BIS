@@ -2,7 +2,7 @@
 
 #define SSID    "NickNet"
 #define PASS    "27304600"
-#define DST_IP  "140.211.12.4" //Corvalis, OR Transit System
+#define DST_IP  "146.227.57.195" //Test server
 
 #define LED 13
 
@@ -84,10 +84,15 @@ void setup(){
 	}
 }
 
-int loops = 0;
+int loops = 1;
+int failCount = 0;
 
 void loop(){
-	dbgSerial.println("[Using External Code]");
+	dbgSerial.print("[Using External Code] [loop count: ");
+	dbgSerial.print(loops);
+	dbgSerial.print("] [failCount: "); 
+	dbgSerial.print(failCount);
+	dbgSerial.println("]");
 //	reset();  //only CERTAIN way I've found of keeping it going
 //  delay(5000);  //esp takes a while to restart
  // Serial.print("loops = ");  //check for successful connections to server
@@ -109,10 +114,11 @@ void loop(){
   else
   {
     dbgSerial.println("'Linked' response not received");  //weak spot! Need to recover elegantly
+	++failCount;
   }
 
-  cmd =  "GET /rtt/public/utility/file.aspx?contenttype=SQLXML&Name=RoutePositionET.xml&PlatformNo=14599 HTTP/1.0\r\n";  //construct http GET request
-  cmd += "Host: corvallistransit.com\r\n\r\n";        //test file on my web
+  cmd =  "GET /~sexton/test.txt HTTP/1.0\r\n";  //construct http GET request
+  cmd += "Host: cse.dmu.ac.uk\r\n\r\n";        //test file on my web
   Serial.print("AT+CIPSEND=");                //www.cse.dmu.ac.uk/~sexton/test.txt
   Serial.print(cmd.length());  //esp8266 needs to know message length of incoming message - .length provides this
   Serial.print("\015\012");
@@ -133,18 +139,18 @@ void loop(){
   //Parse the returned header & web page. Looking for 'Date' line in header
 
   
-//  if (Serial.find("Hello")) //get the date line from the http header (for example)
-//  {
-//    for (int i=0;i<31;i++)  //this should capture the 'Date: ' line from the header
-//    {
+  if (Serial.find("Date: ")) //get the date line from the http header (for example)
+  {
+    for (int i=0;i<31;i++)  //this should capture the 'Date: ' line from the header
+    {
       if (Serial.available())  //new cahracters received?
       {
         char c=Serial.read();  //print to console
         dbgSerial.write(c);
       }
-//      else i--;  //if not, keep going round loop until we've got all the characters
-//    }
-//  }
+      else i--;  //if not, keep going round loop until we've got all the characters
+    }
+  }
 
   Serial.print("AT+CIPCLOSE");  
   Serial.print("\015\012");
@@ -201,6 +207,7 @@ void loop(){
 	*/
 	
 	//Command prompt to send commands to ESP module
+	/*
 	while(1){
 		if(Serial.available()){
 			dbgSerial.print((char) Serial.read());
@@ -210,9 +217,8 @@ void loop(){
 			Serial.print((char)dbgSerial.read());
 		}
 	}
+	*/
 	
-	
-	while(1);
 }
 
 bool connectWiFi() {
