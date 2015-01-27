@@ -15,3 +15,6 @@
   - Main nano is I2C drive, and it pings an aux nano over I2C which talks to the ESP8266 module
   
 - Need to push reset for ESP module while programming
+
+- Indication LEDs
+  - Specific (blue) one to indicate WiFi connectivity. Should be designed to be viewed from outside the case (light pipe?)
