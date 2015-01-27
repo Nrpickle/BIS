@@ -1,0 +1,10 @@
+- Breakout Module to Breadboard-Friendly Form Factor
+
+- Connect CH_PD to 3v3 rail
+
+- Add 5v to 3v3 regulator
+  - Add option to apply 3v3 directly and not populate regulator
+ 
+- Add optional voltage divider / Mosfet for tx step down to 3v3
+
+- Button to connect Reset and GPIO 0 to ground (separately)
