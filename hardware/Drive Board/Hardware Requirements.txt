@@ -18,3 +18,8 @@
 
 - Indication LEDs
   - Specific (blue) one to indicate WiFi connectivity. Should be designed to be viewed from outside the case (light pipe?)
+  - ESP Error LEDs
+	- No internet connection
+	- No website found (eg, 404, 401 errors)
+  - Arduino Error LED
+    - Misc errors
