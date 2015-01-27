@@ -92,7 +92,6 @@ static Display disp2(1);
 
 void loop()
 {
-
   static uint16_t timing = 1;
   static uint16_t i = 0;
   static uint8_t initTimer = 0;
