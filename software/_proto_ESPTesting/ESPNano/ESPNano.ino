@@ -2,7 +2,9 @@
 
 #define SSID    "NickNet"
 #define PASS    "27304600"
-#define DST_IP  "173.194.33.136" //Google.com
+#define DST_IP  "140.211.12.4" //Corvalis, OR Transit System
+
+#define LED 13
 
 SoftwareSerial dbgSerial(11, 10); //Rx, Tx
 
@@ -13,6 +15,9 @@ void setup(){
 	
 	dbgSerial.begin(9600);
 	dbgSerial.println("\n\r[ESP8266 Interface Test]");
+	
+	pinMode(LED, OUTPUT);
+	digitalWrite(LED, LOW);
 	
 	//Test if the module is ready
 	Serial.print("AT\015\012");
@@ -59,7 +64,8 @@ void setup(){
 		testFailed();
 	}
 	
-	delay(5000);	
+	digitalWrite(LED, HIGH);
+	delay(1000);	
 	
 	dbgSerial.println("[Set single connection mode]");
 	Serial.print("AT+CIPMUX=0\015\012");
@@ -112,11 +118,12 @@ void loop(){
   dbgSerial.println("====");
   delay(1000);
 	
-
+  
 	
-	//dbgSerial.println("[Prompting for available networks]");
-	//Serial.print("AT+CWLAP\015\012");
-	
+	/*
+	dbgSerial.println("[Prompting for available networks]");
+	Serial.print("AT+CWLAP\015\012");
+	*/
 	
 	//Command prompt to send commands to ESP module
 	while(1){
