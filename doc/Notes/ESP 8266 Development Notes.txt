@@ -1,0 +1,3 @@
+Need a ctrlm and ctrlj after each command instead of \n ("\015\012")
+
+Module replies that firmware version (by default) is 0018000902
