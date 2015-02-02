@@ -8,3 +8,5 @@
 - Add optional voltage divider / Mosfet for tx step down to 3v3
 
 - Button to connect Reset and GPIO 0 to ground (separately)
+
+- Label Board: ESP8266-01 Development Board
