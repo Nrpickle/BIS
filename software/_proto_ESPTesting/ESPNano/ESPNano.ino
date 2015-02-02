@@ -2,7 +2,7 @@
 
 #define SSID    "NickNet"
 #define PASS    "27304600"
-#define DST_IP  "140.211.12.4" //Corvalis, OR Transit System
+#define DST_IP  "146.227.57.195" //Test server
 
 #define LED 13
 
@@ -84,9 +84,90 @@ void setup(){
 	}
 }
 
-void loop(){
-	
+int loops = 1;
+int failCount = 0;
 
+void loop(){
+	dbgSerial.print("[Using External Code] [loop count: ");
+	dbgSerial.print(loops);
+	dbgSerial.print("] [failCount: "); 
+	dbgSerial.print(failCount);
+	dbgSerial.println("]");
+//	reset();  //only CERTAIN way I've found of keeping it going
+//  delay(5000);  //esp takes a while to restart
+ // Serial.print("loops = ");  //check for successful connections to server
+  //Serial.println(loops); 
+  loops++;
+  String cmd = "AT+CIPSTART=\"TCP\",\"";  //make this command: AT+CPISTART="TCP","146.227.57.195",80
+  cmd += DST_IP;
+  cmd += "\",80";
+  cmd += "\015\012";
+  
+  Serial.print(cmd);  //send command to device
+
+  delay(2000);  //wait a little while for 'Linked' response - this makes a difference
+  if(Serial.find("Linked"))  //message returned when connection established WEAK SPOT!! DOESN'T ALWAYS CONNECT
+  {
+   dbgSerial.print("Connected to server at ");  //debug message
+   dbgSerial.println(DST_IP);
+  }
+  else
+  {
+    dbgSerial.println("'Linked' response not received");  //weak spot! Need to recover elegantly
+	++failCount;
+  }
+
+  cmd =  "GET /~sexton/test.txt HTTP/1.0\r\n";  //construct http GET request
+  cmd += "Host: cse.dmu.ac.uk\r\n\r\n";        //test file on my web
+  Serial.print("AT+CIPSEND=");                //www.cse.dmu.ac.uk/~sexton/test.txt
+  Serial.print(cmd.length());  //esp8266 needs to know message length of incoming message - .length provides this
+  Serial.print("\015\012");
+  
+  if(Serial.find(">"))    //prompt offered by esp8266
+  {
+    dbgSerial.println("found > prompt - issuing GET request");  //a debug message
+    Serial.print(cmd);  //this is our http GET request
+	Serial.print("\015\012");
+  }
+  else
+  {
+    Serial.print("AT+CIPCLOSE");  //doesn't seem to work here?
+	Serial.print("\015\012");
+    dbgSerial.println("No '>' prompt received after AT+CPISEND");
+  }
+
+  //Parse the returned header & web page. Looking for 'Date' line in header
+
+  
+  if (Serial.find("Date: ")) //get the date line from the http header (for example)
+  {
+    for (int i=0;i<31;i++)  //this should capture the 'Date: ' line from the header
+    {
+      if (Serial.available())  //new cahracters received?
+      {
+        char c=Serial.read();  //print to console
+        dbgSerial.write(c);
+      }
+      else i--;  //if not, keep going round loop until we've got all the characters
+    }
+  }
+
+  Serial.print("AT+CIPCLOSE");  
+  Serial.print("\015\012");
+
+  if(Serial.find("Unlink"))  //rarely seems to find Unlink? :(
+  {
+    dbgSerial.println("Connection Closed Ok...");
+  }
+  else
+  {
+    //Serial.println("connection close failure");
+  }
+	
+	
+	
+// Grab a webpage by using IP only
+/*
   String cmd = "AT+CIPSTART=\"TCP\",\"";
   cmd += DST_IP;
   cmd += "\",80";
@@ -117,7 +198,7 @@ void loop(){
   }
   dbgSerial.println("====");
   delay(1000);
-	
+*/	
   
 	
 	/*
@@ -126,6 +207,7 @@ void loop(){
 	*/
 	
 	//Command prompt to send commands to ESP module
+	/*
 	while(1){
 		if(Serial.available()){
 			dbgSerial.print((char) Serial.read());
@@ -135,9 +217,8 @@ void loop(){
 			Serial.print((char)dbgSerial.read());
 		}
 	}
+	*/
 	
-	
-	while(1);
 }
 
 bool connectWiFi() {

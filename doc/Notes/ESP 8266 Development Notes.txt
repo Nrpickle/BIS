@@ -5,3 +5,7 @@ Module replies that firmware version (by default) is 0018000902
 Initial baud rate of 9800
 
 Test device 1 has a MAC of: 18:FE:34:9E:3E:5F
+
+Continuous data grabbing error test (optimal dining table conditions)
+Loop count: 3700
+failCount: 205
