@@ -1,5 +1,7 @@
 - Auto Addressing functionality
  -Use the CD74HC283M96 4 Bit adder to automatically address the boards
+ - Pull down 3 lines heading up to the drive boards (see schematic)
+ - Read in the added 
 
 - DIP Socket for china-based Arduino Nanos
 
