@@ -676,7 +676,7 @@ download the executable.-->
 		<WIRE a='58.00000,30.00000' b='58.00000,36.00000'/>
 		<WIRE a='128.00000,36.00000' b='128.00000,26.00000'/>
 		<JUNCTION pos='58.00000,36.00000'/>
-		<TEXT pos='148.00000,18.00000' direction='3' font='0' color='000000'>Note: Must support &gt;500mA</TEXT>
+		<TEXT pos='148.00000,18.00000' direction='3' font='0' color='000000'>Note: Must support &gt;=500mA</TEXT>
 		<SYMBOL id='6' pos='272.00000,104.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
 			<FIELD type='0' description='Ref' value='U4' show='1' pos='1.00000,-25.60000'/>
 			<FIELD type='0' description='Name' value='ESP8266' show='1' pos='1.00000,-28.00000'/>
@@ -697,13 +697,13 @@ download the executable.-->
 		</SYMBOL>
 		<WIRE a='264.00000,116.00000' b='264.00000,124.00000'/>
 		<WIRE a='264.00000,124.00000' b='252.00000,124.00000'/>
-		<WIRE a='204.00000,112.00000' b='260.00000,112.00000'/>
-		<WIRE a='260.00000,112.00000' b='260.00000,128.00000'/>
-		<WIRE a='260.00000,128.00000' b='252.00000,128.00000'/>
+		<WIRE a='204.00000,112.00000' b='258.00000,112.00000'/>
+		<WIRE a='258.00000,112.00000' b='258.00000,128.00000'/>
+		<WIRE a='258.00000,128.00000' b='252.00000,128.00000'/>
 		<WIRE a='204.00000,112.00000' b='204.00000,128.00000'/>
 		<WIRE a='204.00000,128.00000' b='206.00000,128.00000'/>
 		<WIRE a='52.00000,70.00000' b='52.00000,66.00000'/>
-		<WIRE a='198.00000,124.00000' b='206.00000,124.00000'/>
+		<WIRE a='200.00000,124.00000' b='206.00000,124.00000'/>
 		<WIRE a='272.00000,92.00000' b='274.00000,92.00000'/>
 		<WIRE a='274.00000,92.00000' b='274.00000,132.00000'/>
 		<WIRE a='274.00000,132.00000' b='252.00000,132.00000'/>
@@ -729,14 +729,14 @@ download the executable.-->
 		<POWER pos='68.00000,38.00000' which='4' direction='1'></POWER>
 		<POWER pos='58.00000,168.00000' which='4' direction='1'></POWER>
 		<POWER pos='126.00000,176.00000' which='4' direction='1'></POWER>
-		<POWER pos='202.00000,112.00000' which='4' direction='1'></POWER>
-		<WIRE a='204.00000,112.00000' b='202.00000,112.00000'/>
+		<POWER pos='200.00000,112.00000' which='4' direction='1'></POWER>
+		<WIRE a='204.00000,112.00000' b='200.00000,112.00000'/>
 		<POWER pos='228.00000,84.00000' which='4' direction='1'></POWER>
 		<WIRE a='228.00000,84.00000' b='238.00000,84.00000'/>
 		<POWER pos='140.00000,28.00000' which='4' direction='1'></POWER>
 		<WIRE a='140.00000,28.00000' b='140.00000,26.00000'/>
 		<POWER pos='52.00000,66.00000' which='0' direction='0'>5v</POWER>
-		<POWER pos='198.00000,124.00000' which='0' direction='0'>5v</POWER>
+		<POWER pos='200.00000,124.00000' which='0' direction='0'>5v</POWER>
 		<POWER pos='100.00000,174.00000' which='0' direction='0'>5v</POWER>
 		<POWER pos='224.00000,80.00000' which='0' direction='0'>3v3</POWER>
 		<POWER pos='140.00000,42.00000' which='0' direction='0'>3v3</POWER>
@@ -945,15 +945,13 @@ download the executable.-->
 			<FIELD type='1' description='Cost' value='..' show='0' pos='-14.00000,26.00000'/>
 		</SYMBOL>
 		<TEXT pos='164.00000,78.00000' direction='3' font='0' color='000000'>D4: [green] Arduino Power</TEXT>
-		<SYMBOL id='13' pos='28.00000,88.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
+		<SYMBOL id='13' pos='10.00000,88.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
 			<FIELD type='0' description='Ref' value='S1' show='1' pos='1.00000,-15.60000'/>
 			<FIELD type='0' description='Name' value='SWITCH1' show='1' pos='1.00000,-18.00000'/>
 		</SYMBOL>
-		<WIRE a='26.00000,88.00000' b='32.00000,88.00000'/>
-		<WIRE a='26.00000,68.00000' b='16.00000,68.00000'/>
-		<POWER pos='16.00000,72.00000' which='4' direction='1'></POWER>
-		<WIRE a='16.00000,72.00000' b='16.00000,68.00000'/>
-		<TEXT pos='2.00000,66.00000' direction='3' font='0' color='000000'>Note: External to Enclosure Reset</TEXT>
+		<WIRE a='8.00000,88.00000' b='32.00000,88.00000'/>
+		<POWER pos='26.00000,72.00000' which='4' direction='1'></POWER>
+		<TEXT pos='2.00000,64.00000' direction='3' font='0' color='000000'>Note: External to Enclosure Reset</TEXT>
 		<JUNCTION pos='204.00000,112.00000'/>
 		<JUNCTION pos='224.00000,80.00000'/>
 		<JUNCTION pos='124.00000,46.00000'/>
@@ -965,5 +963,8 @@ download the executable.-->
 		<WIRE a='136.00000,50.00000' b='140.00000,50.00000'/>
 		<POWER pos='112.00000,56.00000' which='0' direction='0'>5v</POWER>
 		<WIRE a='112.00000,56.00000' b='122.00000,56.00000'/>
+		<WIRE a='8.00000,68.00000' b='8.00000,66.00000'/>
+		<WIRE a='8.00000,66.00000' b='26.00000,66.00000'/>
+		<WIRE a='26.00000,66.00000' b='26.00000,72.00000'/>
 	</TinyCAD>
 </TinyCADSheets>
