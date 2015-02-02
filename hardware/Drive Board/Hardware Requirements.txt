@@ -11,8 +11,10 @@
 
 - Rounded edges (for fanciness)
 
+/*
 - Dual Nano setup to reduce flutter on POV for I2C driver?
   - Main nano is I2C drive, and it pings an aux nano over I2C which talks to the ESP8266 module
+*/
   
 - Need to push reset for ESP module while programming (internally) (this will likely change when/if ESP is moved to a software serial port, this will be removed accordingly)
 
