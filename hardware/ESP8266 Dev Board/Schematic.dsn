@@ -9,8 +9,8 @@ download the executable.-->
 		<DETAILS>
 			<Size width='1485' height='1050'/>
 			<GUIDES horiz='7' vert='5'/>
-			<TITLE></TITLE>
-			<AUTHOR></AUTHOR>
+			<TITLE>ESP8266 Dev Board</TITLE>
+			<AUTHOR>Nick McComb</AUTHOR>
 			<REVISION>1.0</REVISION>
 			<DOCNUMBER></DOCNUMBER>
 			<ORGANISATION></ORGANISATION>
@@ -19,16 +19,6 @@ download the executable.-->
 			<DATE></DATE>
 			<GRID spacing='100.00000' snap='1'/>
 		</DETAILS>
-		<FONT id='0'>
-			<HEIGHT>-13</HEIGHT>
-			<WIDTH>6</WIDTH>
-			<WEIGHT>400</WEIGHT>
-			<ITALIC>0</ITALIC>
-			<UNDERLINE>0</UNDERLINE>
-			<STRIKEOUT>0</STRIKEOUT>
-			<CHARSET>0</CHARSET>
-			<FACENAME>Arial</FACENAME>
-		</FONT>
 		<FONT id='1'>
 			<HEIGHT>-10</HEIGHT>
 			<WIDTH>0</WIDTH>
@@ -49,11 +39,16 @@ download the executable.-->
 			<CHARSET>0</CHARSET>
 			<FACENAME>Arial</FACENAME>
 		</FONT>
-		<STYLE id='2'>
-			<STYLE>0</STYLE>
-			<COLOR>000000</COLOR>
-			<THICKNESS>1</THICKNESS>
-		</STYLE>
+		<FONT id='4'>
+			<HEIGHT>-13</HEIGHT>
+			<WIDTH>6</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
 		<STYLE id='3'>
 			<STYLE>0</STYLE>
 			<COLOR>000000</COLOR>
@@ -91,8 +86,8 @@ download the executable.-->
 			</FIELD>
 			<REF_POINT power='0' part='0' pos='78.00000,70.00000'/>
 			<TinyCAD>
-				<RECTANGLE a='48.00000,40.00000' b='74.00000,70.00000' style='2' fill='0'/>
-				<TEXT pos='52.00000,44.00000' direction='3' font='3' color='000000'>ESP 8266 [01]</TEXT>
+				<RECTANGLE a='48.00000,40.00000' b='74.00000,70.00000' style='3' fill='0'/>
+				<TEXT pos='52.00000,44.00000' direction='3' font='4' color='000000'>ESP 8266 [01]</TEXT>
 				<PIN pos='44.00000,46.00000' which='0' elec='0' direction='3' part='0' number='1' show='1' length='30' number_pos='0' centre_name='0'>Vcc</PIN>
 				<PIN pos='44.00000,50.00000' which='0' elec='0' direction='3' part='0' number='2' show='1' length='30' number_pos='0' centre_name='0'>GND</PIN>
 				<PIN pos='44.00000,62.00000' which='0' elec='0' direction='3' part='0' number='3' show='1' length='30' number_pos='0' centre_name='0'>RST</PIN>
@@ -138,8 +133,8 @@ download the executable.-->
 			</FIELD>
 			<REF_POINT power='0' part='0' pos='88.00000,84.00000'/>
 			<TinyCAD>
-				<RECTANGLE a='52.00000,68.00000' b='88.00000,80.00000' style='2' fill='0'/>
-				<TEXT pos='54.00000,72.00000' direction='3' font='3' color='000000'>ESP8266 Dev Board Conn</TEXT>
+				<RECTANGLE a='52.00000,68.00000' b='88.00000,80.00000' style='3' fill='0'/>
+				<TEXT pos='54.00000,72.00000' direction='3' font='4' color='000000'>ESP8266 Dev Board Conn</TEXT>
 				<PIN pos='56.00000,84.00000' which='0' elec='0' direction='0' part='0' number='1' show='1' length='30' number_pos='0' centre_name='0'>5v</PIN>
 				<PIN pos='60.00000,84.00000' which='0' elec='0' direction='0' part='0' number='2' show='1' length='30' number_pos='0' centre_name='0'>3v3</PIN>
 				<PIN pos='64.00000,84.00000' which='0' elec='0' direction='0' part='0' number='3' show='1' length='30' number_pos='0' centre_name='0'>GND</PIN>
@@ -175,8 +170,8 @@ download the executable.-->
 			</FIELD>
 			<REF_POINT power='0' part='0' pos='58.00000,56.00000'/>
 			<TinyCAD>
-				<RECTANGLE a='34.00000,38.00000' b='58.00000,52.00000' style='2' fill='0'/>
-				<TEXT pos='36.00000,42.00000' direction='3' font='3' color='000000'>3V3 Linear Reg</TEXT>
+				<RECTANGLE a='34.00000,38.00000' b='58.00000,52.00000' style='3' fill='0'/>
+				<TEXT pos='36.00000,42.00000' direction='3' font='4' color='000000'>3V3 Linear Reg</TEXT>
 				<PIN pos='40.00000,56.00000' which='0' elec='0' direction='0' part='0' number='1' show='1' length='30' number_pos='0' centre_name='0'>Vin</PIN>
 				<PIN pos='46.00000,56.00000' which='0' elec='0' direction='0' part='0' number='2' show='1' length='30' number_pos='0' centre_name='0'>Vout</PIN>
 				<PIN pos='52.00000,56.00000' which='0' elec='0' direction='0' part='0' number='3' show='1' length='30' number_pos='0' centre_name='0'>GND</PIN>
@@ -230,8 +225,8 @@ download the executable.-->
 			</FIELD>
 			<REF_POINT power='0' part='0' pos='62.00000,82.00000'/>
 			<TinyCAD>
-				<RECTANGLE a='20.00000,58.00000' b='58.00000,82.00000' style='2' fill='0'/>
-				<TEXT pos='22.00000,62.00000' direction='3' font='0' color='000000'>Basic Logic-Level-Converter</TEXT>
+				<RECTANGLE a='20.00000,58.00000' b='58.00000,82.00000' style='3' fill='0'/>
+				<TEXT pos='22.00000,62.00000' direction='3' font='3' color='000000'>Basic Logic-Level-Converter</TEXT>
 				<PIN pos='16.00000,66.00000' which='0' elec='0' direction='3' part='0' number='1' show='1' length='30' number_pos='0' centre_name='0'>High Vcc</PIN>
 				<PIN pos='16.00000,70.00000' which='0' elec='0' direction='3' part='0' number='2' show='1' length='30' number_pos='0' centre_name='0'>GND</PIN>
 				<PIN pos='62.00000,66.00000' which='0' elec='0' direction='2' part='0' number='3' show='1' length='30' number_pos='0' centre_name='0'>Low Vcc</PIN>
@@ -323,7 +318,7 @@ download the executable.-->
 		<WIRE a='96.00000,78.00000' b='96.00000,88.00000'/>
 		<WIRE a='90.00000,78.00000' b='96.00000,78.00000'/>
 		<WIRE a='96.00000,88.00000' b='102.00000,88.00000'/>
-		<TEXT pos='72.00000,68.00000' direction='3' font='0' color='000000'>Note: Switch should be jumper (Label: 5v vs. 3v3)</TEXT>
+		<TEXT pos='72.00000,68.00000' direction='3' font='3' color='000000'>Note: Switch should be jumper (Label: 5v vs. 3v3)</TEXT>
 		<SYMBOL id='5' pos='106.00000,154.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
 			<FIELD type='0' description='Ref' value='U4' show='1' pos='1.00000,-19.60000'/>
 			<FIELD type='0' description='Name' value='Logic Level Converter' show='1' pos='1.00000,-22.00000'/>
@@ -375,7 +370,7 @@ download the executable.-->
 		<WIRE a='146.00000,120.00000' b='146.00000,116.00000'/>
 		<WIRE a='106.00000,150.00000' b='150.00000,150.00000'/>
 		<WIRE a='150.00000,150.00000' b='150.00000,116.00000'/>
-		<TEXT pos='144.00000,92.00000' direction='3' font='0' color='000000'>Note: Switch should be jumper (label: RX 5v vs 3v3)</TEXT>
+		<TEXT pos='144.00000,92.00000' direction='3' font='3' color='000000'>Note: Switch should be jumper (label: RX 5v vs 3v3)</TEXT>
 		<POWER pos='82.00000,158.00000' which='4' direction='1'></POWER>
 		<WIRE a='58.00000,158.00000' b='58.00000,142.00000'/>
 		<WIRE a='58.00000,142.00000' b='60.00000,142.00000'/>
@@ -388,8 +383,8 @@ download the executable.-->
 		<WIRE a='54.00000,138.00000' b='60.00000,138.00000'/>
 		<POWER pos='112.00000,138.00000' which='0' direction='0'>3v3</POWER>
 		<WIRE a='106.00000,138.00000' b='112.00000,138.00000'/>
-		<TEXT pos='50.00000,92.00000' direction='3' font='0' color='000000'>Label: Reset</TEXT>
-		<TEXT pos='88.00000,106.00000' direction='3' font='0' color='000000'>Label: GPIO0</TEXT>
-		<TEXT pos='122.00000,34.00000' direction='3' font='0' color='000000'>Note: Should be able to supply &gt;=400 mA</TEXT>
+		<TEXT pos='50.00000,92.00000' direction='3' font='3' color='000000'>Label: Reset</TEXT>
+		<TEXT pos='88.00000,106.00000' direction='3' font='3' color='000000'>Label: GPIO0</TEXT>
+		<TEXT pos='122.00000,34.00000' direction='3' font='3' color='000000'>Note: Should be able to supply &gt;=400 mA</TEXT>
 	</TinyCAD>
 </TinyCADSheets>

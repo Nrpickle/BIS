@@ -284,14 +284,14 @@ download the executable.-->
 			<COLOR_NOTETEXT_TEXT>FF0000</COLOR_NOTETEXT_TEXT>
 		</OPTIONS>
 		<SYMBOL id='1' pos='136.00000,102.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
-			<FIELD type='0' description='Ref' value='U?' show='1' pos='1.00000,-25.60000'/>
+			<FIELD type='0' description='Ref' value='U1' show='1' pos='1.00000,-25.60000'/>
 			<FIELD type='0' description='Name' value='ESP8266' show='1' pos='1.00000,-28.00000'/>
 			<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
 			<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
 			<FIELD type='1' description='Package' value='package name for PCB layout' show='0' pos='1.00000,-23.20000'/>
 		</SYMBOL>
 		<SYMBOL id='2' pos='60.00000,42.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
-			<FIELD type='0' description='Ref' value='U?' show='1' pos='1.00000,-11.60000'/>
+			<FIELD type='0' description='Ref' value='U3' show='1' pos='1.00000,-11.60000'/>
 			<FIELD type='0' description='Name' value='ESP8266 Dev Board Connector' show='1' pos='1.00000,-14.00000'/>
 			<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
 			<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
@@ -299,7 +299,7 @@ download the executable.-->
 			<FIELD type='0' description='Other' value='..' show='1' pos='1.00000,-9.20000'/>
 		</SYMBOL>
 		<SYMBOL id='3' pos='120.00000,42.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
-			<FIELD type='0' description='Ref' value='U?' show='1' pos='1.00000,-13.60000'/>
+			<FIELD type='0' description='Ref' value='U2' show='1' pos='1.00000,-13.60000'/>
 			<FIELD type='0' description='Name' value='3.3 Volt Linear Reg' show='1' pos='1.00000,-16.00000'/>
 			<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
 			<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
@@ -323,9 +323,9 @@ download the executable.-->
 		<WIRE a='96.00000,78.00000' b='96.00000,88.00000'/>
 		<WIRE a='90.00000,78.00000' b='96.00000,78.00000'/>
 		<WIRE a='96.00000,88.00000' b='102.00000,88.00000'/>
-		<TEXT pos='72.00000,68.00000' direction='3' font='0' color='000000'>Note: Switch should be jumper</TEXT>
-		<SYMBOL id='5' pos='94.00000,146.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
-			<FIELD type='0' description='Ref' value='U?' show='1' pos='1.00000,-19.60000'/>
+		<TEXT pos='72.00000,68.00000' direction='3' font='0' color='000000'>Note: Switch should be jumper (Label: 5v vs. 3v3)</TEXT>
+		<SYMBOL id='5' pos='106.00000,154.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
+			<FIELD type='0' description='Ref' value='U4' show='1' pos='1.00000,-19.60000'/>
 			<FIELD type='0' description='Name' value='Logic Level Converter' show='1' pos='1.00000,-22.00000'/>
 			<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
 			<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0.00000,0.00000'/>
@@ -357,5 +357,39 @@ download the executable.-->
 		<WIRE a='108.00000,42.00000' b='108.00000,48.00000'/>
 		<WIRE a='108.00000,48.00000' b='68.00000,48.00000'/>
 		<WIRE a='68.00000,76.00000' b='70.00000,76.00000'/>
+		<WIRE a='44.00000,42.00000' b='44.00000,116.00000'/>
+		<WIRE a='44.00000,116.00000' b='140.00000,116.00000'/>
+		<WIRE a='140.00000,116.00000' b='140.00000,90.00000'/>
+		<WIRE a='140.00000,90.00000' b='136.00000,90.00000'/>
+		<WIRE a='48.00000,120.00000' b='48.00000,150.00000'/>
+		<WIRE a='48.00000,150.00000' b='60.00000,150.00000'/>
+		<SYMBOL id='4' pos='152.00000,116.00000' part='0' rotate='5' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
+			<FIELD type='0' description='Ref' value='S4' show='1' pos='1.00000,-15.60000'/>
+			<FIELD type='0' description='Name' value='SWITCH3' show='1' pos='1.00000,-18.00000'/>
+		</SYMBOL>
+		<WIRE a='136.00000,94.00000' b='148.00000,94.00000'/>
+		<WIRE a='148.00000,94.00000' b='148.00000,96.00000'/>
+		<JUNCTION pos='48.00000,120.00000'/>
+		<WIRE a='48.00000,120.00000' b='146.00000,120.00000'/>
+		<WIRE a='48.00000,42.00000' b='48.00000,120.00000'/>
+		<WIRE a='146.00000,120.00000' b='146.00000,116.00000'/>
+		<WIRE a='106.00000,150.00000' b='150.00000,150.00000'/>
+		<WIRE a='150.00000,150.00000' b='150.00000,116.00000'/>
+		<TEXT pos='144.00000,92.00000' direction='3' font='0' color='000000'>Note: Switch should be jumper (label: RX 5v vs 3v3)</TEXT>
+		<POWER pos='82.00000,158.00000' which='4' direction='1'></POWER>
+		<WIRE a='58.00000,158.00000' b='58.00000,142.00000'/>
+		<WIRE a='58.00000,142.00000' b='60.00000,142.00000'/>
+		<WIRE a='106.00000,142.00000' b='108.00000,142.00000'/>
+		<WIRE a='108.00000,142.00000' b='108.00000,158.00000'/>
+		<WIRE a='82.00000,158.00000' b='58.00000,158.00000'/>
+		<WIRE a='108.00000,158.00000' b='82.00000,158.00000'/>
+		<JUNCTION pos='82.00000,158.00000'/>
+		<POWER pos='54.00000,138.00000' which='0' direction='0'>5v</POWER>
+		<WIRE a='54.00000,138.00000' b='60.00000,138.00000'/>
+		<POWER pos='112.00000,138.00000' which='0' direction='0'>3v3</POWER>
+		<WIRE a='106.00000,138.00000' b='112.00000,138.00000'/>
+		<TEXT pos='50.00000,92.00000' direction='3' font='0' color='000000'>Label: Reset</TEXT>
+		<TEXT pos='88.00000,106.00000' direction='3' font='0' color='000000'>Label: GPIO0</TEXT>
+		<TEXT pos='122.00000,34.00000' direction='3' font='0' color='000000'>Note: Should be able to supply &gt;=400 mA</TEXT>
 	</TinyCAD>
 </TinyCADSheets>
