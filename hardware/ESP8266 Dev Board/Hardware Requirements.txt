@@ -1,4 +1,5 @@
 - Breakout Module to Breadboard-Friendly Form Factor
+  - Should use the same 2x4 .1" spaced connector (just the female side)
 
 - Connect CH_PD to 3v3 rail
 
