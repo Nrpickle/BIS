@@ -11,22 +11,16 @@
 
 - Rounded edges (for fanciness)
 
-/*
-- Dual Nano setup to reduce flutter on POV for I2C driver?
-  - Main nano is I2C drive, and it pings an aux nano over I2C which talks to the ESP8266 module
-*/
-  
-/*
-- Need to push reset for ESP module while programming (internally) (this will likely change when/if ESP is moved to a software serial port, this will be removed accordingly)
-*/
-
-- Breakout Arduino Reset (externally)
+- Breakout Arduino Reset (externally, in that there will be a button on the enclosure)
 
 - Indication LEDs
-  - Specific (blue) one to indicate WiFi connectivity. Should be designed to be viewed from outside the case (light pipe?)
+  - (blue) one to indicate WiFi connectivity. Should be designed to be viewed from outside the case (light pipe?)
   - ESP Error LEDs
 	- No internet connection
 	- No website found (eg, 404, 401 errors)
   - Arduino Error LED
     - Misc error
+
+- Test Points
+  - Because this is a prototype device: Add test points to Vin (from jack), 5v, 3v3, RX on the ESP8266 (check that it's receiving 3v3 signals)
 
