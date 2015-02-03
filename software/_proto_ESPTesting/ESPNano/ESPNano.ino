@@ -118,17 +118,23 @@ void loop(){
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   cmd =  "GET / HTTP/1.1\r\n";  //construct http GET request
   cmd += "Host: nickmccomb.com\r\n\r\n";        //test file on my web
   ESPComm.print("AT+CIPSEND=");                //www.cse.dmu.ac.uk/~sexton/test.txt
   ESPComm.print(cmd.length());  //esp8266 needs to know message length of incoming message - .length provides this
   ESPComm.print("\015\012");
 =======
+=======
+>>>>>>> parent of 40fe488... Added Current ESP Development Code
   cmd =  "GET /~sexton/test.txt HTTP/1.0\r\n";  //construct http GET request
   cmd += "Host: cse.dmu.ac.uk\r\n\r\n";        //test file on my web
   Serial.print("AT+CIPSEND=");                //www.cse.dmu.ac.uk/~sexton/test.txt
   Serial.print(cmd.length());  //esp8266 needs to know message length of incoming message - .length provides this
   Serial.print("\015\012");
+<<<<<<< HEAD
+>>>>>>> parent of 40fe488... Added Current ESP Development Code
+=======
 >>>>>>> parent of 40fe488... Added Current ESP Development Code
   
   if(Serial.find(">"))    //prompt offered by esp8266
