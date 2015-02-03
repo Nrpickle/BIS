@@ -51,6 +51,8 @@ void setup(){
 		testFailed();
 	}
 	
+	
+	/*
 	Serial.println("[Attempting to connect to WiFi]");
 	bool connected = false;
 	for (int i = 0; i < 5; i++){
@@ -80,20 +82,24 @@ void setup(){
 		if(ESPComm.available()){
 			Serial.print((char) ESPComm.read());
 		}
-		delay(1);
+		delay(1); 
 	}
+	*/
 }
 
 int loops = 1;
 int failCount = 0;
 
 void loop(){
+	/*
+	
 	Serial.print("[Using External Code] [loop count: ");
 	Serial.print(loops);
 	Serial.print("] [failCount: "); 
 	Serial.print(failCount);
 	Serial.println("]");
-//	reset();  //only CERTAIN way I've found of keeping it going
+
+	//	reset();  //only CERTAIN way I've found of keeping it going
 //  delay(5000);  //esp takes a while to restart
  // ESPComm.print("loops = ");  //check for successful connections to server
   //ESPComm.println(loops); 
@@ -164,6 +170,7 @@ void loop(){
     //ESPComm.println("connection close failure");
   }
 	
+	*/
 	
 	
 // Grab a webpage by using IP only
@@ -201,13 +208,13 @@ void loop(){
 */	
   
 	
-	/*
+	
 	Serial.println("[Prompting for available networks]");
 	ESPComm.print("AT+CWLAP\015\012");
-	*/
+	
 	
 	//Command prompt to send commands to ESP module
-	/*
+	
 	while(1){
 		if(ESPComm.available()){
 			Serial.print((char) ESPComm.read());
@@ -217,7 +224,7 @@ void loop(){
 			ESPComm.print((char)Serial.read());
 		}
 	}
-	*/
+	
 	
 }
 
