@@ -6,12 +6,12 @@
 
 #define LED 13
 
-SoftwareSerial dbgSerial(11, 10); //Rx, Tx
+SoftwareSerial ESPComm(11, 10); //Rx, Tx
 
 void setup(){
-	//Open serial communication
-	Serial.begin(9600);
-	Serial.setTimeout(5000);
+	//Open ESPComm communication
+	dbgSerial.begin(9600);
+	dbgSerial.setTimeout(5000);
 	
 	dbgSerial.begin(9600);
 	dbgSerial.println("\n\r[ESP8266 Interface Test]");
@@ -20,9 +20,9 @@ void setup(){
 	digitalWrite(LED, LOW);
 	
 	//Test if the module is ready
-	Serial.print("AT\015\012");
+	ESPComm.print("AT\015\012");
 	delay(2000);
-	if(Serial.available())
+	if(ESPComm.available())
 	{
 		dbgSerial.println("Module is ready");
 	}
@@ -32,7 +32,7 @@ void setup(){
 		while(1);
 	}
 	
-	if(Serial.find("OK")){
+	if(ESPComm.find("OK")){
 		dbgSerial.println("[Module Responded OK]");
 	}
 	/* else {
@@ -42,9 +42,9 @@ void setup(){
 	delay(500);
 	
 	dbgSerial.println("[Prompting Reset]");
-	Serial.print("AT+RST\015\012");
+	ESPComm.print("AT+RST\015\012");
 	
-	if(Serial.find("OK")){
+	if(ESPComm.find("OK")){
 		dbgSerial.println("[Module Responded OK]");
 	}
 	else {
@@ -68,17 +68,17 @@ void setup(){
 	delay(1000);	
 	
 	dbgSerial.println("[Set single connection mode]");
-	Serial.print("AT+CIPMUX=0\015\012");
+	ESPComm.print("AT+CIPMUX=0\015\012");
 	
-	if(Serial.find("OK")){
+	if(ESPComm.find("OK")){
 		dbgSerial.println("[Module Responded OK]");
 	}
 	
 	dbgSerial.println("[Requesting IP]");
-	Serial.print("AT+CIFSR\015\012");
+	ESPComm.print("AT+CIFSR\015\012");
 	for(int i = 0; i < 500; ++i){
-		if(Serial.available()){
-			dbgSerial.print((char) Serial.read());
+		if(ESPComm.available()){
+			dbgSerial.print((char) ESPComm.read());
 		}
 		delay(1);
 	}
@@ -95,18 +95,18 @@ void loop(){
 	dbgSerial.println("]");
 //	reset();  //only CERTAIN way I've found of keeping it going
 //  delay(5000);  //esp takes a while to restart
- // Serial.print("loops = ");  //check for successful connections to server
-  //Serial.println(loops); 
+ // ESPComm.print("loops = ");  //check for successful connections to server
+  //ESPComm.println(loops); 
   loops++;
   String cmd = "AT+CIPSTART=\"TCP\",\"";  //make this command: AT+CPISTART="TCP","146.227.57.195",80
   cmd += DST_IP;
   cmd += "\",80";
   cmd += "\015\012";
   
-  Serial.print(cmd);  //send command to device
+  ESPComm.print(cmd);  //send command to device
 
   delay(2000);  //wait a little while for 'Linked' response - this makes a difference
-  if(Serial.find("Linked"))  //message returned when connection established WEAK SPOT!! DOESN'T ALWAYS CONNECT
+  if(ESPComm.find("Linked"))  //message returned when connection established WEAK SPOT!! DOESN'T ALWAYS CONNECT
   {
    dbgSerial.print("Connected to server at ");  //debug message
    dbgSerial.println(DST_IP);
@@ -119,49 +119,49 @@ void loop(){
 
   cmd =  "GET /~sexton/test.txt HTTP/1.0\r\n";  //construct http GET request
   cmd += "Host: cse.dmu.ac.uk\r\n\r\n";        //test file on my web
-  Serial.print("AT+CIPSEND=");                //www.cse.dmu.ac.uk/~sexton/test.txt
-  Serial.print(cmd.length());  //esp8266 needs to know message length of incoming message - .length provides this
-  Serial.print("\015\012");
+  ESPComm.print("AT+CIPSEND=");                //www.cse.dmu.ac.uk/~sexton/test.txt
+  ESPComm.print(cmd.length());  //esp8266 needs to know message length of incoming message - .length provides this
+  ESPComm.print("\015\012");
   
-  if(Serial.find(">"))    //prompt offered by esp8266
+  if(ESPComm.find(">"))    //prompt offered by esp8266
   {
     dbgSerial.println("found > prompt - issuing GET request");  //a debug message
-    Serial.print(cmd);  //this is our http GET request
-	Serial.print("\015\012");
+    ESPComm.print(cmd);  //this is our http GET request
+	ESPComm.print("\015\012");
   }
   else
   {
-    Serial.print("AT+CIPCLOSE");  //doesn't seem to work here?
-	Serial.print("\015\012");
+    ESPComm.print("AT+CIPCLOSE");  //doesn't seem to work here?
+	ESPComm.print("\015\012");
     dbgSerial.println("No '>' prompt received after AT+CPISEND");
   }
 
   //Parse the returned header & web page. Looking for 'Date' line in header
 
   
-  if (Serial.find("Date: ")) //get the date line from the http header (for example)
+  if (ESPComm.find("Date: ")) //get the date line from the http header (for example)
   {
     for (int i=0;i<31;i++)  //this should capture the 'Date: ' line from the header
     {
-      if (Serial.available())  //new cahracters received?
+      if (ESPComm.available())  //new cahracters received?
       {
-        char c=Serial.read();  //print to console
+        char c=ESPComm.read();  //print to console
         dbgSerial.write(c);
       }
       else i--;  //if not, keep going round loop until we've got all the characters
     }
   }
 
-  Serial.print("AT+CIPCLOSE");  
-  Serial.print("\015\012");
+  ESPComm.print("AT+CIPCLOSE");  
+  ESPComm.print("\015\012");
 
-  if(Serial.find("Unlink"))  //rarely seems to find Unlink? :(
+  if(ESPComm.find("Unlink"))  //rarely seems to find Unlink? :(
   {
     dbgSerial.println("Connection Closed Ok...");
   }
   else
   {
-    //Serial.println("connection close failure");
+    //ESPComm.println("connection close failure");
   }
 	
 	
@@ -171,28 +171,28 @@ void loop(){
   String cmd = "AT+CIPSTART=\"TCP\",\"";
   cmd += DST_IP;
   cmd += "\",80";
-  Serial.println(cmd);
+  ESPComm.println(cmd);
   dbgSerial.println(cmd);
-  if (Serial.find("Error")) return;
+  if (ESPComm.find("Error")) return;
   cmd = "GET / HTTP/1.0\r\n\r\n";
-  Serial.print("AT+CIPSEND=");
-  Serial.println(cmd.length());
-  if (Serial.find(">"))
+  ESPComm.print("AT+CIPSEND=");
+  ESPComm.println(cmd.length());
+  if (ESPComm.find(">"))
   {
     dbgSerial.print(">");
   } else
   {
-    Serial.println("AT+CIPCLOSE");
+    ESPComm.println("AT+CIPCLOSE");
     dbgSerial.println("connect timeout");
     delay(1000);
     return;
   }
-  Serial.print(cmd);
+  ESPComm.print(cmd);
   delay(2000);
-  //Serial.find("+IPD");
-  while (Serial.available())
+  //ESPComm.find("+IPD");
+  while (ESPComm.available())
   {
-    char c = Serial.read();
+    char c = ESPComm.read();
     dbgSerial.write(c);
     if (c == '\r') dbgSerial.print('\n');
   }
@@ -203,18 +203,18 @@ void loop(){
 	
 	/*
 	dbgSerial.println("[Prompting for available networks]");
-	Serial.print("AT+CWLAP\015\012");
+	ESPComm.print("AT+CWLAP\015\012");
 	*/
 	
 	//Command prompt to send commands to ESP module
 	/*
 	while(1){
-		if(Serial.available()){
-			dbgSerial.print((char) Serial.read());
+		if(ESPComm.available()){
+			dbgSerial.print((char) ESPComm.read());
 		}
 		
 		if(dbgSerial.available()){
-			Serial.print((char)dbgSerial.read());
+			ESPComm.print((char)dbgSerial.read());
 		}
 	}
 	*/
@@ -222,7 +222,7 @@ void loop(){
 }
 
 bool connectWiFi() {
-	Serial.println("AT+CWMODE=1");
+	ESPComm.println("AT+CWMODE=1");
 	
 	String cmd = "AT+CWJAP=\"";
 	cmd += SSID;
@@ -232,9 +232,9 @@ bool connectWiFi() {
 	cmd += "\015\012";
 	
 	dbgSerial.println(cmd);
-	Serial.print(cmd);
+	ESPComm.print(cmd);
 	
-	if(Serial.find("OK")) {
+	if(ESPComm.find("OK")) {
 		dbgSerial.println("[Connected to WiFi]");
 		return true;
 	}
