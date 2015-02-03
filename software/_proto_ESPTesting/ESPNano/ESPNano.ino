@@ -2,7 +2,7 @@
 
 #define SSID    "NickNet"
 #define PASS    "27304600"
-#define DST_IP  "146.227.57.195" //Test server
+#define DST_IP  "74.208.156.175" //Nickmccomb.net
 
 #define LED 13
 
@@ -117,8 +117,8 @@ void loop(){
 	++failCount;
   }
 
-  cmd =  "GET /~sexton/test.txt HTTP/1.0\r\n";  //construct http GET request
-  cmd += "Host: cse.dmu.ac.uk\r\n\r\n";        //test file on my web
+  cmd =  "GET / HTTP/1.1\r\n";  //construct http GET request
+  cmd += "Host: nickmccomb.com\r\n\r\n";        //test file on my web
   ESPComm.print("AT+CIPSEND=");                //www.cse.dmu.ac.uk/~sexton/test.txt
   ESPComm.print(cmd.length());  //esp8266 needs to know message length of incoming message - .length provides this
   ESPComm.print("\015\012");
