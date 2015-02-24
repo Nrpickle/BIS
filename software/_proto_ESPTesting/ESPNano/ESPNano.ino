@@ -6,18 +6,22 @@
 
 #define LED 13
 
+#define RESET_PIN 7
+
 SoftwareSerial ESPComm(11, 10); //Rx, Tx
 
 void setup(){ 
 	//Open ESPComm communication
-	ESPComm.begin(9600);
+	ESPComm.begin(57600);
 	ESPComm.setTimeout(5000);
 	
-	Serial.begin(9600);
+	Serial.begin(57600);
 	Serial.println("\n\r[ESP8266 Interface Test]");
 	
 	pinMode(LED, OUTPUT);
 	digitalWrite(LED, LOW);
+	
+	pinMode(RESET_PIN, INPUT); //Set pinMode as input so that it will not affect anything
 	
 	//Test if the module is ready
 	ESPComm.print("AT\015\012");
@@ -88,6 +92,8 @@ int loops = 1;
 int failCount = 0;
 
 void loop(){
+	/*
+	
 	Serial.print("[Using External Code] [loop count: ");
 	Serial.print(loops);
 	Serial.print("] [failCount: "); 
@@ -136,9 +142,18 @@ void loop(){
     Serial.println("No '>' prompt received after AT+CPISEND");
   }
 
-  //Parse the returned header & web page. Looking for 'Date' line in header
 
+  //Wait for 1 second and pass pack packets
+	while(1){
+		if(ESPComm.available()){
+			Serial.print((char) ESPComm.read());
+		}
+		//delayMicroseconds(100);
+	}
+  */
   
+  //Parse the returned header & web page. Looking for 'Date' line in header
+  /* //Date finder 
   if (ESPComm.find("Date: ")) //get the date line from the http header (for example)
   {
     for (int i=0;i<31;i++)  //this should capture the 'Date: ' line from the header
@@ -151,7 +166,9 @@ void loop(){
       else i--;  //if not, keep going round loop until we've got all the characters
     }
   }
+  */
 
+  /*
   ESPComm.print("AT+CIPCLOSE");  
   ESPComm.print("\015\012");
 
@@ -164,8 +181,10 @@ void loop(){
     //ESPComm.println("connection close failure");
   }
 	
-	
-	
+  delay(1000); //Delay for readability's sake
+  */
+  
+  
 // Grab a webpage by using IP only
 /*
   String cmd = "AT+CIPSTART=\"TCP\",\"";
@@ -206,8 +225,8 @@ void loop(){
 	ESPComm.print("AT+CWLAP\015\012");
 	*/
 	
-	//Command prompt to send commands to ESP module
-	/*
+	//Command prompt to send commands to ESP module (passthrough)
+	
 	while(1){
 		if(ESPComm.available()){
 			Serial.print((char) ESPComm.read());
@@ -217,7 +236,7 @@ void loop(){
 			ESPComm.print((char)Serial.read());
 		}
 	}
-	*/
+	
 	
 }
 
@@ -247,5 +266,9 @@ bool connectWiFi() {
 
 void testFailed(){
 	Serial.println("[### Previous Test Failed ###]");
+	Serial.println("[!!## RESETTING DEVICE in 1 SECOND ##!!]");
+	delay(1000);
+	pinMode(RESET_PIN, OUTPUT);
+	digitalWrite(RESET_PIN, HIGH);  //Reset arduino	
 	while(1);
 }
